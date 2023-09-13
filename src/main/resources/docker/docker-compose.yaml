@@ -1,0 +1,23 @@
+version: "3"
+services:
+  database:
+    image: postgres:14-alpine
+    container_name: average_price
+    restart: always
+    ports:
+        - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: average_price
+    healthcheck:
+        test: [ "CMD", "pg_isready" ]
+        interval: 20s
+        timeout: 10s
+        retries: 5
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  app_network:
+    driver: bridge

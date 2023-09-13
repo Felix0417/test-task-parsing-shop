@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/average_price
+    username: root
+    password: root
+
+site:
+  url: https://www.citilink.ru/catalog/videokarty--rtx-4070-ti/
+  search:
+    class: .app-catalog-15mhgn3 [data-meta-price]
+    attribute: data-meta-price

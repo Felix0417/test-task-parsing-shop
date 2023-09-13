@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('date', 'Дата');
+            data.addColumn('number', 'RTX 4070Ti');
+
+            var chartData = [[${chartData}]];
+            for (var i = 0; i < chartData.length; i++) {
+                var date = new Date(chartData[i].date);
+                var price = chartData[i].price;
+                data.addRow([date, price]);
+            }
+
+            var options = {
+                title: 'Средняя минимальная стоимость видеокарты RTX 4070Ti в магазине "Ситилинк за последние 5 дней"',
+                curveType: 'function',
+                legend: {
+                    position: 'bottom'
+                },
+                hAxis: {
+                    title: 'Дата',
+                },
+                vAxis: {
+                    title: 'Стоимость, руб',
+                }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+<div id="curve_chart" style="width: 1850px; height: 900px"></div>
+</body>
+</html>
